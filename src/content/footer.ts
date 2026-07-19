@@ -25,6 +25,7 @@ export const footerColumns: FooterColumn[] = [
     heading: "Useful Links",
     links: [
       { label: "Exam Notes", href: "/resources" },
+      { label: "Tutor's Section", href: "/tutors" },
       { label: "Book a Free Demo", href: "/contact" },
       { label: "Contact", href: "/contact" },
     ],

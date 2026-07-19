@@ -55,3 +55,46 @@ export async function appendLead(lead: LeadRow) {
     },
   });
 }
+
+export type TutorApplicationRow = {
+  name: string;
+  phone: string;
+  email: string;
+  qualification: string;
+  experience: string;
+  classLevels: string;
+  subjects: string;
+  mode: string;
+  message: string;
+};
+
+export async function appendTutorApplication(application: TutorApplicationRow) {
+  const sheetId = process.env.GOOGLE_SHEET_ID;
+  if (!sheetId) {
+    throw new Error("GOOGLE_SHEET_ID is missing from environment variables.");
+  }
+
+  const sheets = getSheetsClient();
+
+  await sheets.spreadsheets.values.append({
+    spreadsheetId: sheetId,
+    range: "TutorApplications!A:J",
+    valueInputOption: "USER_ENTERED",
+    requestBody: {
+      values: [
+        [
+          new Date().toISOString(),
+          application.name,
+          application.phone,
+          application.email,
+          application.qualification,
+          application.experience,
+          application.classLevels,
+          application.subjects,
+          application.mode,
+          application.message,
+        ],
+      ],
+    },
+  });
+}

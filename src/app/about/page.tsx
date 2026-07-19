@@ -58,28 +58,6 @@ export default function AboutPage() {
           ))}
         </ScrollReveal>
 
-        <ScrollReveal className="mx-auto mt-16 max-w-3xl border-t border-rule pt-10 text-center">
-          <p className="text-xs uppercase tracking-wide text-ink-soft">
-            Certified By
-          </p>
-          <div className="mt-8 grid grid-cols-1 gap-8 sm:grid-cols-3">
-            {about.certifications.map((cert) => (
-              <div key={cert.name} className="flex flex-col items-center gap-3">
-                <div className="relative aspect-[10/7] w-full overflow-hidden rounded-lg border border-rule bg-ink">
-                  <Image
-                    src={cert.image.src}
-                    alt={cert.image.alt}
-                    fill
-                    className="object-cover"
-                    sizes="(min-width: 640px) 33vw, 100vw"
-                  />
-                </div>
-                <p className="text-sm font-medium text-ink-soft">{cert.name}</p>
-              </div>
-            ))}
-          </div>
-        </ScrollReveal>
-
         <div className="mx-auto mt-16 flex max-w-3xl justify-center">
           <PillButton href="/contact" variant="solid">
             BOOK A FREE DEMO

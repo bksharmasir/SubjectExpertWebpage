@@ -9,6 +9,7 @@ export const primaryNav: NavItem[] = [
   { label: "What We Teach", href: "/services" },
   { label: "Results", href: "/testimonials" },
   { label: "Exam Notes", href: "/resources" },
+  { label: "Tutor's Section", href: "/tutors" },
   { label: "Contact", href: "/contact" },
 ];
 
