@@ -1,6 +1,7 @@
 export const siteConfig = {
   businessName: "Subject Expert Commerce Academy",
   shortName: "Subject Expert",
+  nameSuffix: "Commerce Academy",
   logo: {
     src: "https://placehold.co/160x160/0b2a3a/a3d1e0.png?text=SE",
     alt: "Subject Expert Commerce Academy logo — placeholder, replace with real logo",

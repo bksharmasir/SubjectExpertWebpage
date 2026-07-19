@@ -16,11 +16,13 @@ export function Header() {
             height={40}
             className="size-9 shrink-0 rounded-full object-cover sm:size-10"
           />
-          <span className="hidden whitespace-nowrap font-display text-lg tracking-[0.12em] text-ink md:inline lg:text-xl lg:tracking-[0.15em]">
-            {siteConfig.businessName.toUpperCase()}
-          </span>
-          <span className="font-display text-lg tracking-[0.1em] text-ink md:hidden">
-            {siteConfig.shortName.toUpperCase()}
+          <span className="flex flex-col items-center leading-tight text-ink">
+            <span className="whitespace-nowrap font-display text-sm tracking-[0.08em] sm:text-lg sm:tracking-[0.12em] lg:text-xl lg:tracking-[0.15em]">
+              {siteConfig.shortName.toUpperCase()}
+            </span>
+            <span className="whitespace-nowrap font-display text-[10px] tracking-[0.2em] text-ink-soft sm:text-xs sm:tracking-[0.25em] lg:text-sm">
+              {siteConfig.nameSuffix.toUpperCase()}
+            </span>
           </span>
         </Link>
         <div aria-hidden className="size-9 sm:size-10" />
