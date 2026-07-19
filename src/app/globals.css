@@ -1,26 +1,42 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Sky-blue palette — 0077B3 as the primary accent, ivory-blue backgrounds.
+     --ink/--ink-soft are a deep navy derived from 0077B3 (not one of the
+     requested hexes) — kept dark enough for body text and the dark header/
+     footer/hero sections, since the requested set had no near-black shade. */
+  --ink: #0b2a3a;
+  --ink-soft: #3d6478;
+  --paper: #f0f8ff;
+  --paper-soft: #e0f7fa;
+  --brass: #0077b3;
+  --brass-bright: #a3d1e0;
+  --rule: #cfe6ee;
+  --moss: #ffffff;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-paper: var(--paper);
+  --color-paper-soft: var(--paper-soft);
+  --color-brass: var(--brass);
+  --color-brass-bright: var(--brass-bright);
+  --color-rule: var(--rule);
+  --color-moss: var(--moss);
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --font-display: var(--font-fraunces);
+  --font-script: var(--font-caveat);
+  --font-body: var(--font-work-sans);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+}
+
+::selection {
+  background: var(--brass);
+  color: var(--paper);
 }
