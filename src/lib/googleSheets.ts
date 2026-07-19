@@ -56,6 +56,24 @@ export async function appendLead(lead: LeadRow) {
   });
 }
 
+export async function appendNewsletterSignup(email: string) {
+  const sheetId = process.env.GOOGLE_SHEET_ID;
+  if (!sheetId) {
+    throw new Error("GOOGLE_SHEET_ID is missing from environment variables.");
+  }
+
+  const sheets = getSheetsClient();
+
+  await sheets.spreadsheets.values.append({
+    spreadsheetId: sheetId,
+    range: "NewsletterSignups!A:B",
+    valueInputOption: "USER_ENTERED",
+    requestBody: {
+      values: [[new Date().toISOString(), email]],
+    },
+  });
+}
+
 export type TutorApplicationRow = {
   name: string;
   phone: string;
