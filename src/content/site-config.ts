@@ -1,4 +1,5 @@
 export const siteConfig = {
+  siteUrl: "https://subject-expert-webpage-z3ca.vercel.app",
   businessName: "Subject Expert Commerce Academy",
   shortName: "Subject Expert",
   nameSuffix: "Commerce Academy",
