@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import { appendLead } from "@/lib/googleSheets";
 import { notifyLeadByEmail } from "@/lib/notifyEmail";
+import { capLength, isValidPhone } from "@/lib/security";
+import { getClientIp, isRateLimited } from "@/lib/rateLimit";
 
 type ContactPayload = {
   name?: string;
@@ -14,6 +16,13 @@ type ContactPayload = {
 };
 
 export async function POST(request: Request) {
+  if (isRateLimited(getClientIp(request))) {
+    return NextResponse.json(
+      { error: "Too many requests. Please try again later." },
+      { status: 429 }
+    );
+  }
+
   const body: ContactPayload = await request.json();
 
   // Honeypot: bots fill every field, including ones hidden from real users.
@@ -28,14 +37,21 @@ export async function POST(request: Request) {
     );
   }
 
+  if (!isValidPhone(body.phone.trim())) {
+    return NextResponse.json(
+      { error: "Please enter a valid phone number." },
+      { status: 400 }
+    );
+  }
+
   const lead = {
-    name: body.name.trim(),
-    phone: body.phone.trim(),
-    course: body.course?.trim() || "Not specified",
-    subject: body.subject?.trim() || "Not specified",
-    mode: body.mode?.trim() || "Not specified",
-    place: body.place?.trim() || "",
-    message: body.message?.trim() || "",
+    name: capLength(body.name.trim(), 200),
+    phone: capLength(body.phone.trim(), 20),
+    course: capLength(body.course?.trim() || "Not specified", 200),
+    subject: capLength(body.subject?.trim() || "Not specified", 200),
+    mode: capLength(body.mode?.trim() || "Not specified", 200),
+    place: capLength(body.place?.trim() || "", 200),
+    message: capLength(body.message?.trim() || "", 2000),
   };
 
   try {

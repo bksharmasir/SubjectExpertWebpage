@@ -1,5 +1,6 @@
 import { Resend } from "resend";
 import type { LeadRow, TutorApplicationRow } from "./googleSheets";
+import { escapeHtml } from "./security";
 
 export async function notifyLeadByEmail(lead: LeadRow) {
   const apiKey = process.env.RESEND_API_KEY;
@@ -27,7 +28,7 @@ export async function notifyLeadByEmail(lead: LeadRow) {
   const htmlRows = rows
     .map(
       ([label, value]) =>
-        `<tr><td style="padding:4px 12px 4px 0;color:#666;font-weight:600;">${label}</td><td style="padding:4px 0;">${value}</td></tr>`
+        `<tr><td style="padding:4px 12px 4px 0;color:#666;font-weight:600;">${escapeHtml(label)}</td><td style="padding:4px 0;">${escapeHtml(value)}</td></tr>`
     )
     .join("");
 
@@ -73,7 +74,7 @@ export async function notifyTutorApplicationByEmail(application: TutorApplicatio
   const htmlRows = rows
     .map(
       ([label, value]) =>
-        `<tr><td style="padding:4px 12px 4px 0;color:#666;font-weight:600;">${label}</td><td style="padding:4px 0;">${value}</td></tr>`
+        `<tr><td style="padding:4px 12px 4px 0;color:#666;font-weight:600;">${escapeHtml(label)}</td><td style="padding:4px 0;">${escapeHtml(value)}</td></tr>`
     )
     .join("");
 

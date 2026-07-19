@@ -13,13 +13,13 @@ export function NewsletterSignup() {
     setStatus("loading");
 
     const form = event.currentTarget;
-    const email = new FormData(form).get("email");
+    const data = Object.fromEntries(new FormData(form).entries());
 
     try {
       const response = await fetch("/api/newsletter", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email }),
+        body: JSON.stringify(data),
       });
 
       if (!response.ok) throw new Error("Request failed");
@@ -43,6 +43,14 @@ export function NewsletterSignup() {
           <p className="font-display text-brass">You&apos;re on the list. Thank you!</p>
         ) : (
           <div className="flex w-full flex-col gap-2 sm:w-auto">
+            <input
+              type="text"
+              name="website"
+              tabIndex={-1}
+              autoComplete="off"
+              aria-hidden="true"
+              className="absolute left-[-9999px] h-0 w-0 opacity-0"
+            />
             <div className="flex w-full items-center gap-3 border-b border-ink/30 pb-2 sm:w-auto sm:min-w-[320px]">
               <input
                 required

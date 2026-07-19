@@ -1,4 +1,5 @@
 import { google } from "googleapis";
+import { sanitizeForSheets } from "./security";
 
 export type LeadRow = {
   name: string;
@@ -38,18 +39,18 @@ export async function appendLead(lead: LeadRow) {
   await sheets.spreadsheets.values.append({
     spreadsheetId: sheetId,
     range: "Sheet1!A:H",
-    valueInputOption: "USER_ENTERED",
+    valueInputOption: "RAW",
     requestBody: {
       values: [
         [
           new Date().toISOString(),
-          lead.name,
-          lead.phone,
-          lead.course,
-          lead.subject,
-          lead.mode,
-          lead.place,
-          lead.message,
+          sanitizeForSheets(lead.name),
+          sanitizeForSheets(lead.phone),
+          sanitizeForSheets(lead.course),
+          sanitizeForSheets(lead.subject),
+          sanitizeForSheets(lead.mode),
+          sanitizeForSheets(lead.place),
+          sanitizeForSheets(lead.message),
         ],
       ],
     },
@@ -67,9 +68,9 @@ export async function appendNewsletterSignup(email: string) {
   await sheets.spreadsheets.values.append({
     spreadsheetId: sheetId,
     range: "NewsletterSignups!A:B",
-    valueInputOption: "USER_ENTERED",
+    valueInputOption: "RAW",
     requestBody: {
-      values: [[new Date().toISOString(), email]],
+      values: [[new Date().toISOString(), sanitizeForSheets(email)]],
     },
   });
 }
@@ -97,20 +98,20 @@ export async function appendTutorApplication(application: TutorApplicationRow) {
   await sheets.spreadsheets.values.append({
     spreadsheetId: sheetId,
     range: "TutorApplications!A:J",
-    valueInputOption: "USER_ENTERED",
+    valueInputOption: "RAW",
     requestBody: {
       values: [
         [
           new Date().toISOString(),
-          application.name,
-          application.phone,
-          application.email,
-          application.qualification,
-          application.experience,
-          application.classLevels,
-          application.subjects,
-          application.mode,
-          application.message,
+          sanitizeForSheets(application.name),
+          sanitizeForSheets(application.phone),
+          sanitizeForSheets(application.email),
+          sanitizeForSheets(application.qualification),
+          sanitizeForSheets(application.experience),
+          sanitizeForSheets(application.classLevels),
+          sanitizeForSheets(application.subjects),
+          sanitizeForSheets(application.mode),
+          sanitizeForSheets(application.message),
         ],
       ],
     },
