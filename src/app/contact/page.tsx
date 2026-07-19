@@ -43,7 +43,7 @@ export default function ContactPage() {
 
           <ScrollReveal delay={0.1}>
             <MapEmbed
-              query={`${siteConfig.map.lat},${siteConfig.map.lng}`}
+              query={`${siteConfig.businessName}, ${siteConfig.locality}`}
               label={siteConfig.businessName}
             />
           </ScrollReveal>
